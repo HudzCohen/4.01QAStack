@@ -1,0 +1,53 @@
+﻿@using _4._01QAStack.Data
+@model IndexViewModel
+
+<div class="row">
+    <div class="col-md-8 offset-md-2" style="margin-top:100px">
+        @if (Model.Questions.Count == 0 || Model.Questions == null)
+        {
+            <h1>There are no questions yet. Be the first to ask!</h1>
+        }
+        @foreach (Question question in Model.Questions)
+        {
+            <div class="card card-body bg-light">
+                <h4>
+                    <a href="/question/viewquestion?id=@question.Id">@question.Title</a>
+                </h4>
+                <div>
+                    <span>Tags:</span>
+                    @foreach (var qt in question.QuestionTags)
+                    {
+                        @*  <a href="/question/questionsbytag?tagName=@qt.Tag.Name">
+                        <span class="badge bg-primary">@qt.Tag.Name</span>
+                        </a> *@
+                       
+                            <span class="badge bg-primary">@qt.Tag.Name</span>
+                       
+                    }
+                </div>
+                <div class="margin-top: 10px;">
+                    @question.Text
+                </div>
+                <span> Likes: @question.Likes</span>
+                <br />
+                <span>@question.Answers.Count answer(s)</span>
+
+            </div>
+        }
+    </div>
+    @section scripts {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+        <script>
+            $(() => {
+                $("#tags").tagsinput({
+                    tagClass: 'badge bg-dark'
+                });
+            })
+        </script>
+    }
+    @section styles
+    {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+    }
+
+</div>

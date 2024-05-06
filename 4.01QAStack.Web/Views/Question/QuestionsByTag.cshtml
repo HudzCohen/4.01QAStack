@@ -1,0 +1,22 @@
+﻿@using _4._01QAStack.Data
+@model QuestionByTagViewModel
+
+<div class="row">
+    <div class="table">
+        <table class="table table-dark table-hover table-striped table-bordered">
+          <tr>
+              <th>Title</th>
+              <th>Question</th>
+              <th>Tags</th>
+          </tr>
+          @foreach(Question question in Model.Questions)
+            {
+                <tr>
+                    <td>@question.Title</td>
+                    <td>@question.Text</td>
+                    <td> @String.Join(", ", question.QuestionTags.Select(q => q.Tag.Name))</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
